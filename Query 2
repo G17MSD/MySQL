@@ -1,0 +1,24 @@
+use library;
+SELECT * FROM address;
+SELECT * FROM book;
+SELECT * FROM loan_trans;
+SELECT * FROM patron;
+
+-- Retrieve all book titles.
+SELECT title FROM book;
+-- Fetch all patron names.
+SELECT first_name FROM patron;
+-- Get all subjects of the books.
+SELECT subject FROM book;
+-- Retrieve all loan transactions.
+SELECT * FROM loan_trans;
+-- Fetch all addresses of patrons.
+SELECT * FROM patron;
+-- Get the total number of patrons.
+SELECT count(*) FROM patron;
+-- Retrieve the number of books in the computing subject.
+SELECT count(*) from book where subject='Computing';
+-- Fetch all loan transactions with unpaid fees.
+SELECT * FROM loan_trans where loan_fee_paid=0; 
+-- Retrieve the first and last names of patrons with email addresses.
+SELECT first_name,last_name,email FROM patron;
