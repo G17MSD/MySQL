@@ -1,0 +1,33 @@
+use order_bookstore;
+CREATE table authors ( 
+author_id INT Primary Key,
+first_name varchar(100),
+last_name varchar(100),
+birth_date DATE );
+CREATE table books(
+book_ID INT Primary Key,
+title varchar(100),
+author_ID INT,
+price DECIMAL,
+published_date DATE,
+FOREIGN KEY (author_id) references authors(author_id) );
+CREATE table customers (
+customer_id INT Primary Key,
+first_name varchar(50),
+last_name varchar(50),
+email varchar(100),
+phone varchar(20) );
+INSERT into authors(author_id,first_name,last_name,birth_date)
+VALUES (1034,'Gurman','Singh',17-08-2008),
+(0002,'Piyush','Chakerwarty',09-04-2000),
+(1234,'John','Smith',31-03-13);
+INSERT into books(book_id,title,author_ID,price,published_date)
+VALUES (1034,'Harry Potter',1034,12.99,12-04-12),
+(0002,'Hobbit',1035,10.99,13-06-98),
+(1234,'Avengers',1036,9.99,09-04-10);
+INSERT into customers(customer_id,first_name,last_name,email,phone)
+VALUES (10394,'Gurman','Singh','gurman@email.com',07453464357),
+(10567,'Rio','Dog','rio@email.com',87345645644);
+UPDATE books set price=15.99 WHERE author_ID=1034;
+SELECT AVG(price) AS average_price FROM books;
+SELECT COUNT(*) AS total_customers FROM customers;
