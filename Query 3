@@ -1,0 +1,41 @@
+use school;
+CREATE table school_management(
+student_ID INT Primary Key,
+first_name varchar(50),
+last_name varchar(50),
+age INT,
+grade varchar(10));
+
+INSERT into school_management(student_ID,first_name,last_name,age,grade)
+VALUES (0001,'Gurman','Singh',14,6),
+(0002,'Piyush','Sir',16,9),
+(1024,'Andrei','redacted',13,5),
+(1001, 'John', 'Doe', 25, 7),
+(1002, 'Jane', 'Smith',24, 8),
+(1003, 'Michael', 'Johnson', 19, 5),
+(1004, 'Emily', 'Brown', 12, 9),
+(1005, 'David', 'Davis', 17, 6),
+(1006, 'Sarah', 'Wilson', 13, 4),
+(1007, 'James', 'Taylor', 13, 7),
+(1008, 'Jessica', 'Martinez', 26, 6),
+(1009, 'Daniel', 'Anderson', 29, 8),
+(1010, 'Jennifer', 'Lee', 11, 9);
+
+SELECT * FROM school_management;
+SELECT * FROM school_management WHERE grade = '9';
+SELECT * FROM school_management WHERE age<15;
+SELECT * FROM school_management WHERE last_name LIKE 'S%';
+SELECT * FROM school_management ORDER BY age DESC;
+UPDATE school_management set age=15 WHERE student_ID=0001;
+SELECT * FROM school_management;
+UPDATE school_management set grade=10 WHERE student_ID=1004;
+SELECT * FROM school_management;
+DELETE FROM school_management WHERE student_ID=1003;
+SELECT avg(age) FROM school_management;
+SELECT count(student_ID) FROM school_management;
+SELECT * FROM school_management WHERE first_name like 'J%';
+SELECT COUNT(*) AS count_j_students FROM school_management WHERE first_name LIKE 'J%';
+SELECT MIN(age) AS lowest_age, MAX(age) AS highest_age FROM school_management;
+-- Delete all students with grade 9
+DELETE student_ID FROM school_management WHERE grade='9';
+DELETE FROM school_management WHERE age = (SELECT MAX(age) FROM school_management);
