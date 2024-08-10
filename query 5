@@ -1,0 +1,95 @@
+USE library_management;
+DROP TABLE IF EXISTS loans;
+DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS authors;
+CREATE TABLE authors (
+    AuthorID INT PRIMARY KEY,
+    author_name VARCHAR(255),
+    BirthYear INT,
+    Country VARCHAR(100)
+);
+
+CREATE TABLE books (
+    Book_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255),
+    Author_ID INT,
+    Genre VARCHAR(100),
+    PublishedYear YEAR,
+    ISBN VARCHAR(13),
+    FOREIGN KEY (Author_ID) REFERENCES authors(AuthorID)
+);
+CREATE TABLE members (
+    MemberID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(255),
+    JoinDate DATE
+);
+
+CREATE TABLE loans (
+    loanID INT PRIMARY KEY AUTO_INCREMENT,
+    Book_ID INT,
+    MemberID INT,
+    LoanDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (Book_ID) REFERENCES books(Book_ID),
+    FOREIGN KEY (MemberID) REFERENCES members(MemberID)
+);
+
+INSERT INTO authors (AuthorID, author_name, BirthYear, Country)
+VALUES 
+(1, 'F. Scott Fitzgerald', 1896, 'USA'),
+(2, 'Harper Lee', 1926, 'USA'),
+(3, 'George Orwell', 1903, 'United Kingdom'),
+(4, 'Jane Austen', 1775, 'United Kingdom'),
+(5, 'Mark Twain', 1835, 'USA'),
+(6, 'J.K. Rowling', 1965, 'United Kingdom'),
+(7, 'Ernest Hemingway', 1899, 'USA'),
+(8, 'Leo Tolstoy', 1828, 'Russia');
+
+INSERT INTO books (Title, Author_ID, Genre, PublishedYear, ISBN)
+VALUES 
+('The Great Gatsby', 1, 'Fiction', 1925, '9780743273565'), 
+('To Kill a Mockingbird', 2, 'Fiction', 1960, '9780061120084'), 
+('1984', 3, 'Dystopian', 1949, '9780451524935'),
+('Pride and Prejudice', 4, 'Romance', 1813, '9780141439518'),
+('Adventures of Huckleberry Finn', 5, 'Adventure', 1884, '9780486280615'),
+('Harry Potter and the Sorcerer\'s Stone', 6, 'Fantasy', 1997, '9780590353427'),
+('The Old Man and the Sea', 7, 'Fiction', 1952, '9780684801223'),
+('War and Peace', 8, 'Historical Fiction', 1869, '9780199232765');
+
+INSERT INTO members (FirstName, LastName, Email, JoinDate)
+VALUES 
+('John', 'Doe', 'john.doe@example.com', '2022-01-15'), 
+('Jane', 'Smith', 'jane.smith@example.com', '2021-11-23'), 
+('Emily', 'Johnson', 'emily.johnson@example.com', '2023-03-12'), 
+('Michael', 'Brown', 'michael.brown@example.com', '2020-08-30'),
+('William', 'Davis', 'william.davis@example.com', '2023-04-01'),
+('Olivia', 'Garcia', 'olivia.garcia@example.com', '2022-07-22'),
+('Sophia', 'Martinez', 'sophia.martinez@example.com', '2021-12-05'),
+('James', 'Anderson', 'james.anderson@example.com', '2020-11-18');
+INSERT INTO loans (Book_ID, MemberID, LoanDate, ReturnDate)
+VALUES 
+(1, 1, '2024-05-01', '2024-05-15'), 
+(2, 2, '2024-04-22', '2024-05-06'), 
+(3, 3, '2024-03-10', '2024-03-24'), 
+(4, 4, '2024-02-14', '2024-02-28'),
+(5, 5, '2024-01-20', '2024-02-03'),
+(6, 6, '2023-12-15', '2023-12-29'),
+(7, 7, '2023-11-10', '2023-11-24'),
+(8, 8, '2023-10-05', '2023-10-19'),
+(9, 9, '2023-09-01', '2023-09-15'),
+(10, 10, '2023-08-16', '2023-08-30');
+SELECT * FROM authors;
+SELECT * FROM books;
+SELECT * FROM members;
+SELECT * FROM loans;
+DESCRIBE authors;
+DESCRIBE books;
+DESCRIBE members;
+DESCRIBE loans;
+SELECT * FROM authors WHERE AuthorID = 2;
+SELECT * FROM authors WHERE AuthorID BETWEEN 1 AND 4;
+SELECT * FROM books WHERE Title = 'The Great Gatsby';
+SELECT * FROM authors WHERE AuthorID IN (2, 3, 4);
